@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inventario PWA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <main class="app">
+
+    <section id="login" class="card login-card">
+      <h1>Gestión de Inventarios</h1>
+      <p class="subtitle">Acceso al sistema</p>
+
+      <input id="usuario" type="text" placeholder="Usuario" />
+      <input id="password" type="password" placeholder="Contraseña" />
+
+      <button onclick="login()">Ingresar</button>
+      <p id="mensajeLogin"></p>
+    </section>
+
+    <section id="sistema" class="oculto">
+      <header class="header">
+        <div>
+          <h1>Panel de Inventario</h1>
+          <p>Control físico vs sistema</p>
+        </div>
+        <button class="btn-secundario" onclick="cerrarSesion()">Cerrar sesión</button>
+      </header>
+
+      <section class="cards">
+        <div class="mini-card">
+          <h3>Total productos</h3>
+          <p id="totalProductos">0</p>
+        </div>
+        <div class="mini-card">
+          <h3>Correctos</h3>
+          <p id="totalCorrectos">0</p>
+        </div>
+        <div class="mini-card">
+          <h3>Discrepancias</h3>
+          <p id="totalDiscrepancias">0</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 id="tituloFormulario">Registro de producto</h2>
+
+        <input id="nombreProducto" type="text" placeholder="Nombre del producto" />
+        <input id="cantidadProducto" type="number" placeholder="Cantidad física" />
+        <input id="cantidadSistema" type="number" placeholder="Cantidad en sistema" />
+<select id="unidadProducto">
+  <option value="">Selecciona unidad</option>
+  <option value="Piezas">Piezas</option>
+  <option value="Kilos">Kilos</option>
+  <option value="Cajas">Cajas</option>
+  <option value="Bolsas">Bolsas</option>
+  <option value="Litros">Litros</option>
+</select>
+
+        <button onclick="guardarProducto()">Guardar producto</button>
+        <button class="btn-secundario" onclick="cancelarEdicion()">Cancelar edición</button>
+      </section>
+
+      <section class="card">
+        <h2>Consulta de inventario</h2>
+
+        <input id="buscador" type="text" placeholder="Buscar producto..." oninput="mostrarInventario()" />
+
+        <table>
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Unidad</th>
+              <th>Físico</th>
+              <th>Sistema</th>
+              <th>Diferencia</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="tablaInventario"></tbody>
+        </table>
+
+        <button class="btn-peligro" onclick="limpiarInventario()">Limpiar inventario</button>
+      </section>
+
+      <section class="card">
+        <h2>Reporte</h2>
+        <p id="reporte"></p>
+      </section>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

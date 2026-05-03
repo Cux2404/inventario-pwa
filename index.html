@@ -51,14 +51,15 @@
         <input id="nombreProducto" type="text" placeholder="Nombre del producto" />
         <input id="cantidadProducto" type="number" placeholder="Cantidad física" />
         <input id="cantidadSistema" type="number" placeholder="Cantidad en sistema" />
-<select id="unidadProducto">
-  <option value="">Selecciona unidad</option>
-  <option value="Piezas">Piezas</option>
-  <option value="Kilos">Kilos</option>
-  <option value="Cajas">Cajas</option>
-  <option value="Bolsas">Bolsas</option>
-  <option value="Litros">Litros</option>
-</select>
+
+        <select id="unidadProducto">
+          <option value="">Selecciona unidad</option>
+          <option value="Piezas">Piezas</option>
+          <option value="Kilos">Kilos</option>
+          <option value="Cajas">Cajas</option>
+          <option value="Bolsas">Bolsas</option>
+          <option value="Litros">Litros</option>
+        </select>
 
         <button onclick="guardarProducto()">Guardar producto</button>
         <button class="btn-secundario" onclick="cancelarEdicion()">Cancelar edición</button>
@@ -69,28 +70,32 @@
 
         <input id="buscador" type="text" placeholder="Buscar producto..." oninput="mostrarInventario()" />
 
-        <table>
-          <thead>
-            <tr>
-              <th>Producto</th>
-              <th>Unidad</th>
-              <th>Físico</th>
-              <th>Sistema</th>
-              <th>Diferencia</th>
-              <th>Estado</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody id="tablaInventario"></tbody>
-        </table>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Producto</th>
+                <th>Unidad</th>
+                <th>Físico</th>
+                <th>Sistema</th>
+                <th>Diferencia</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tablaInventario"></tbody>
+          </table>
+        </div>
 
         <button class="btn-peligro" onclick="limpiarInventario()">Limpiar inventario</button>
+        <button class="btn-secundario" onclick="cerrarDia()">Cerrar día</button>
       </section>
 
       <section class="card">
         <h2>Reporte</h2>
         <p id="reporte"></p>
       </section>
+
     </section>
 
   </main>

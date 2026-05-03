@@ -26,6 +26,7 @@ function guardarProducto() {
   const fisico = Number(document.getElementById("cantidadProducto").value);
   const sistema = Number(document.getElementById("cantidadSistema").value);
   const unidad = document.getElementById("unidadProducto").value;
+
   if (!nombre || !unidad || fisico < 0 || sistema < 0) {
     alert("Completa correctamente todos los campos.");
     return;
@@ -34,20 +35,20 @@ function guardarProducto() {
   if (productoEditando) {
     inventario = inventario.map(producto => {
       if (producto.id === productoEditando) {
-        return { id: producto.id, nombre, fisico, sistema };
+        return { id: producto.id, nombre, unidad, fisico, sistema };
       }
       return producto;
     });
     productoEditando = null;
     document.getElementById("tituloFormulario").textContent = "Registro de producto";
   } else {
-   inventario.push({
-  id: Date.now(),
-  nombre,
-  unidad,
-  fisico,
-  sistema
-});
+    inventario.push({
+      id: Date.now(),
+      nombre,
+      unidad,
+      fisico,
+      sistema
+    });
   }
 
   limpiarFormulario();
@@ -101,7 +102,7 @@ function editarProducto(id) {
   document.getElementById("cantidadProducto").value = producto.fisico;
   document.getElementById("cantidadSistema").value = producto.sistema;
   document.getElementById("unidadProducto").value = producto.unidad;
-  
+
   productoEditando = id;
   document.getElementById("tituloFormulario").textContent = "Editar producto";
 }
@@ -121,6 +122,26 @@ function limpiarInventario() {
   mostrarInventario();
 }
 
+/* 🔥 CIERRE DE DÍA */
+function cerrarDia() {
+  const fecha = new Date().toLocaleDateString();
+
+  let historial = JSON.parse(localStorage.getItem("historial")) || [];
+
+  historial.push({
+    fecha: fecha,
+    datos: inventario
+  });
+
+  localStorage.setItem("historial", JSON.stringify(historial));
+
+  alert("Día guardado correctamente");
+
+  inventario = [];
+  guardarDatos();
+  mostrarInventario();
+}
+
 function cancelarEdicion() {
   productoEditando = null;
   limpiarFormulario();
@@ -131,6 +152,7 @@ function limpiarFormulario() {
   document.getElementById("nombreProducto").value = "";
   document.getElementById("cantidadProducto").value = "";
   document.getElementById("cantidadSistema").value = "";
+  document.getElementById("unidadProducto").value = "";
 }
 
 function guardarDatos() {
